@@ -15,7 +15,7 @@
 ## 🌟 Overview
 This project is a movie recommendation app where users can browse and search for movies. It fetches movie information from The Movie Database (TMDb) API and displays posters, titles, and other relevant details. Navigation within the app is handled using React Router.  
 
-**Live Demo:** [Click here to view the app](https://movierecommendationapp-online.netlify.app/) 
+**Live Demo:** [Open the app in your browser](https://movierecommendationapp-online.netlify.app/) 
 
 ---
 
