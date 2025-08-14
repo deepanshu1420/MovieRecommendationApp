@@ -5,21 +5,22 @@
 [![Axios](https://img.shields.io/badge/Axios-v1.4.0-yellow)](https://axios-http.com/)
 [![React Router](https://img.shields.io/badge/React_Router-v6.14.2-red)](https://reactrouter.com/)
 [![React Icons](https://img.shields.io/badge/React_Icons-v4.10.1-purple)](https://react-icons.github.io/react-icons/)
+[![TMDb API](https://img.shields.io/badge/TMDb_API-v3-lightblue)](https://www.themoviedb.org/documentation/api)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**A React-based web application that recommends movies using live data from a movie database.**
+**A React-based web application that recommends movies using data fetched from The Movie Database (TMDb) API.**
 
 ---
 
 ## 🌟 Overview
-This project is a movie recommendation app where users can browse and search for movies. It fetches movie information from an online movie database and displays posters, titles, and other relevant details. Navigation within the app is handled using React Router.  
+This project is a movie recommendation app where users can browse and search for movies. It fetches movie information from The Movie Database (TMDb) API and displays posters, titles, and other relevant details. Navigation within the app is handled using React Router.  
 
-**Live Demo:** [Click here to view the app](https://movierecommendationapp-online.netlify.app/) 
+**Live Demo:** [Click here to view the app](movierecommendationapp-online.netlify.app) 
 
 ---
 
 ## ⚡ Features
-- **Movie Listings:** Browse popular movies fetched from an online movie database.  
+- **Movie Listings:** Browse popular movies fetched from TMDb API.  
 - **Search Movies:** Search for movies by title using a responsive search bar.  
 - **Movie Posters:** Displays high-quality movie posters for each listing.  
 - **Navigation:** Seamless page navigation using React Router.  
@@ -30,7 +31,7 @@ This project is a movie recommendation app where users can browse and search for
 ## 🛠 Tech Stack
 - **React:** Core library for building the UI components.  
 - **Create React App:** For project setup and development environment.  
-- **Axios:** Handles HTTP requests to fetch movie data.  
+- **Axios:** Handles HTTP requests to fetch movie data from TMDb API.  
 - **React Router:** Provides navigation between different pages or views.  
 - **CSS:** Standard CSS for styling components.  
 - **React Icons:** For UI icons such as the search icon.  
@@ -38,7 +39,7 @@ This project is a movie recommendation app where users can browse and search for
 ---
 
 ## 🌐 Data Source
-- Movie data (titles, descriptions, posters, ratings) is fetched dynamically from an online movie database using HTTP requests.
+- Movie data (titles, descriptions, posters, ratings) is fetched dynamically from **The Movie Database (TMDb) API**.
 
 ---
 
