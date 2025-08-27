@@ -1,4 +1,4 @@
-# 🎬 Movie Recommendation App
+# 🎬 Movie Recommendation App 
 
 [![React](https://img.shields.io/badge/React-v18.2.0-blue)](https://reactjs.org/)
 [![Create React App](https://img.shields.io/badge/Create_React_App-v5.0.1-lightgrey)](https://create-react-app.dev/)
@@ -25,6 +25,28 @@ This project is a movie recommendation app where users can browse and search for
 - **Movie Posters:** Displays high-quality movie posters for each listing.  
 - **Navigation:** Seamless page navigation using React Router.  
 - **Icons:** Uses React Icons for a clean and interactive UI.  
+
+---
+
+## ✨ Additional Features & Highlights
+- **Modern Glass Design:** Transparent glassmorphism cards with smooth borders.  
+- **Dynamic Backgrounds:** Moving gradient animations for an engaging UI.  
+- **Hover & Animations:** Subtle hover effects and transitions for an interactive feel.  
+
+---
+
+## 🖼 Screenshots  
+
+### Home  
+![Home](./screenshots/home.png)  
+![Home 1](./screenshots/home1.png)  
+
+### Search  
+![Search](./screenshots/Search.png)  
+
+### Mobile View  
+![Mobile View](./screenshots/MobileView.png)  
+![Mobile View 1](./screenshots/MobileView1.png)  
 
 ---
 
