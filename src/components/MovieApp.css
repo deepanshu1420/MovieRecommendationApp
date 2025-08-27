@@ -228,6 +228,13 @@ h1 {
   .search-input { width: 200px; }
   .filters { flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
   #sort-by, #genre { padding: 5px 8px; font-size: 10px; }
+
+  /* Mobile poster fix */
+  .movie img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 @media (max-width: 450px) {
@@ -240,4 +247,11 @@ h1 {
   .search-button { font-size: 12px; }
   .filters { flex-direction: column; align-items: flex-start; margin-left: 20px; gap: 7px; margin-bottom: 10px; }
   #sort-by, #genre { padding: 5px 8px; font-size: 10px; }
+
+  /* Mobile poster fix */
+  .movie img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
 }
