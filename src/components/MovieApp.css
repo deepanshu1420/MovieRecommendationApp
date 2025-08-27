@@ -159,17 +159,22 @@ h1 {
 }
 
 /* ================= Buttons ================= */
+
 .read-more {
   background-color: #092635;
   color: #f9f9f9;
-  margin: 10px 10px 10px 0;
-  padding: 5px 10px;
+  margin: 15px 0; /* center it inside */
+  margin-bottom: -10px;
+  padding: 10px 0;
   cursor: pointer;
   outline: none;
   border: none;
   font-weight: 700;
-  border-radius: 50px;
+  border-radius: 45px; /* flatter corners so it looks like a full button */
   transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;          /* take full card width */
+  text-align: center;   /* center the text */
+  display: block;       /* make sure it behaves like a block element */
 }
 
 .read-more:hover {
@@ -195,6 +200,7 @@ h1 {
   cursor: pointer;
   transition: 0.3s ease;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  
 }
 
 .load-more-btn:hover {
