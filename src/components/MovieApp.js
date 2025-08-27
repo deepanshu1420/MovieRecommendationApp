@@ -10,67 +10,74 @@ const MovieRecommendations = () => {
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState('');
   const [expandedMovieId, setExpandedMovieId] = useState(null);
-  const [page, setPage] = useState(1); // ✅ track pagination
+  const [page, setPage] = useState(1);
 
-  // Fetch Genres
+  // Fetch genres on mount
   useEffect(() => {
     const fetchGenres = async () => {
-      const response = await axios.get(
-        'https://api.themoviedb.org/3/genre/movie/list',
-        { params: { api_key: '0fa2853e7c4d6c8f146aba861c5e4a06' } }
-      );
-      setGenres(response.data.genres);
+      try {
+        const response = await axios.get(
+          'https://api.themoviedb.org/3/genre/movie/list',
+          { params: { api_key: '0fa2853e7c4d6c8f146aba861c5e4a06' } }
+        );
+        setGenres(response.data.genres);
+      } catch (err) {
+        console.error('Error fetching genres:', err);
+      }
     };
     fetchGenres();
   }, []);
 
-  // Fetch Movies (Search or Bollywood Discover)
+  // Fetch movies (discover or search)
   useEffect(() => {
     const fetchMovies = async () => {
-      const endpoint = searchQuery
-        ? 'https://api.themoviedb.org/3/search/movie'
-        : 'https://api.themoviedb.org/3/discover/movie';
+      try {
+        const endpoint = searchQuery
+          ? 'https://api.themoviedb.org/3/search/movie'
+          : 'https://api.themoviedb.org/3/discover/movie';
 
-      const response = await axios.get(endpoint, {
-        params: {
-          api_key: '0fa2853e7c4d6c8f146aba861c5e4a06',
-          query: searchQuery || undefined,
-          sort_by: searchQuery ? undefined : sortBy,
-          with_genres: searchQuery ? undefined : selectedGenre,
-          page: page,
-          region: searchQuery ? undefined : 'IN',
-          with_original_language: searchQuery ? undefined : 'hi',
-        },
-      });
+        const response = await axios.get(endpoint, {
+          params: {
+            api_key: '0fa2853e7c4d6c8f146aba861c5e4a06',
+            query: searchQuery || undefined,
+            sort_by: searchQuery ? undefined : sortBy,
+            with_genres: searchQuery ? undefined : selectedGenre,
+            page,
+            region: searchQuery ? undefined : 'IN',
+            with_original_language: searchQuery ? undefined : 'hi',
+          },
+        });
 
-      if (page === 1) setMovies(response.data.results);
-      else setMovies((prev) => [...prev, ...response.data.results]); // append for Load More
+        if (page === 1) setMovies(response.data.results);
+        else setMovies((prev) => [...prev, ...response.data.results]);
+      } catch (err) {
+        console.error('Error fetching movies:', err);
+      }
     };
+
     fetchMovies();
   }, [searchQuery, sortBy, selectedGenre, page]);
 
-  const handleSearchChange = (event) => setSearchQuery(event.target.value);
-  const handleSortChange = (event) => setSortBy(event.target.value);
-  const handleGenreChange = (event) => setSelectedGenre(event.target.value);
+  const handleSearchChange = (e) => setSearchQuery(e.target.value);
+  const handleSortChange = (e) => setSortBy(e.target.value);
+  const handleGenreChange = (e) => setSelectedGenre(e.target.value);
 
-  const handleSearchSubmit = async () => {
-    setPage(1); // reset to page 1 when searching
-    const response = await axios.get(
-      'https://api.themoviedb.org/3/search/movie',
-      { params: { api_key: '0fa2853e7c4d6c8f146aba861c5e4a06', query: searchQuery } }
-    );
-    setMovies(response.data.results);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setPage(1); // Reset pagination on new search
   };
 
-  const toggleDescription = (movieId) =>
-    setExpandedMovieId(expandedMovieId === movieId ? null : movieId);
+  const toggleDescription = (id) =>
+    setExpandedMovieId(expandedMovieId === id ? null : id);
 
-  const loadMoreMovies = () => setPage((prev) => prev + 1); // ✅ Load more
+  const loadMoreMovies = () => setPage((prev) => prev + 1);
 
   return (
     <div>
       <h1>MovieHouse</h1>
-      <div className="search-bar">
+
+      {/* Search Bar */}
+      <form className="search-bar" onSubmit={handleSearchSubmit}>
         <input
           type="text"
           placeholder="Search movies..."
@@ -78,10 +85,12 @@ const MovieRecommendations = () => {
           onChange={handleSearchChange}
           className="search-input"
         />
-        <button onClick={handleSearchSubmit} className="search-button">
+        <button type="submit" className="search-button">
           <AiOutlineSearch />
         </button>
-      </div>
+      </form>
+
+      {/* Filters */}
       <div className="filters">
         <label htmlFor="sort-by">Sort By:</label>
         <select id="sort-by" value={sortBy} onChange={handleSortChange}>
@@ -92,14 +101,19 @@ const MovieRecommendations = () => {
           <option value="release_date.desc">Release Date Descending</option>
           <option value="release_date.asc">Release Date Ascending</option>
         </select>
+
         <label htmlFor="genre">Genre:</label>
         <select id="genre" value={selectedGenre} onChange={handleGenreChange}>
           <option value="">All Genres</option>
           {genres.map((genre) => (
-            <option key={genre.id} value={genre.id}>{genre.name}</option>
+            <option key={genre.id} value={genre.id}>
+              {genre.name}
+            </option>
           ))}
         </select>
       </div>
+
+      {/* Movie Grid */}
       <div className="movie-wrapper">
         {movies.map((movie) => (
           <div key={movie.id} className="movie">
@@ -113,18 +127,22 @@ const MovieRecommendations = () => {
             />
             <h2>{movie.title}</h2>
             <p className="rating">Rating: {movie.vote_average}</p>
-            {expandedMovieId === movie.id ? (
-              <p>{movie.overview}</p>
-            ) : (
-              <p>{movie.overview?.substring(0, 150)}...</p>
-            )}
-            <button onClick={() => toggleDescription(movie.id)} className="read-more">
+            <p>
+              {expandedMovieId === movie.id
+                ? movie.overview
+                : `${movie.overview?.substring(0, 150)}...`}
+            </p>
+            <button
+              className="read-more"
+              onClick={() => toggleDescription(movie.id)}
+            >
               {expandedMovieId === movie.id ? 'Show Less' : 'Read More'}
             </button>
           </div>
         ))}
       </div>
-      {/* ✅ Load More Button */}
+
+      {/* Load More */}
       <div className="load-more-container">
         <button className="load-more-btn" onClick={loadMoreMovies}>
           Load More
