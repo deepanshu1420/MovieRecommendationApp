@@ -8,7 +8,7 @@
 [![TMDb API](https://img.shields.io/badge/TMDb_API-v3-lightblue)](https://www.themoviedb.org/documentation/api)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**A React-based web application that recommends movies using data fetched from The Movie Database (TMDb) API.**
+**A React web app that recommends movies using data from The Movie Database (TMDb) API.**
 
 ---
 
